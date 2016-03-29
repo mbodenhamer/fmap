@@ -1,6 +1,6 @@
 import os
 import sys
-from .fmap import fmap
+from fmap import fmap
 
 #-------------------------------------------------------------------------------
 
