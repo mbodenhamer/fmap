@@ -19,7 +19,7 @@ setup(
     install_requires = [],
     entry_points = {
         'console_scripts': [
-            'fmap = fmap.main:main',
+            'fmap = fmap.__main__:main',
         ]
     },
     license = 'MIT',
