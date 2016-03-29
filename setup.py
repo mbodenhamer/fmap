@@ -17,7 +17,11 @@ setup(
     url = 'https://github.com/mbodenhamer/fmap',
     packages = find_packages(),
     install_requires = [],
-    entry_points = [],
+    entry_points = {
+        'console_scripts': [
+            'fmap = fmap.main:main',
+        ]
+    },
     license = 'MIT',
     classifiers = []
 )
