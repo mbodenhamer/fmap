@@ -15,7 +15,7 @@ setup(
     version = version('version.txt'),
     author = 'Matt Bodenhamer',
     author_email = 'mbodenhamer@mbodenhamer.com',
-    description = 'A command-line utility (and library) for recursively applying a command to a filesystem tree',
+    description = 'A command-line utility for recursively applying a command to a filesystem tree',
     long_description = read('README.rst'),
     url = 'https://github.com/mbodenhamer/fmap',
     packages = find_packages(),
