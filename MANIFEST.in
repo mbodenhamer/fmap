@@ -1,2 +1,3 @@
 include MANIFEST.in README.rst LICENSE
+include requirements.txt
 include version.txt

@@ -4,6 +4,9 @@ def read(fpath):
     with open(fpath, 'r') as f:
         return f.read()
 
+def requirements(fpath):
+    return list(filter(bool, read(fpath).split('\n')))
+
 def version(fpath):
     return read(fpath).strip()
 
@@ -16,7 +19,7 @@ setup(
     long_description = read('README.rst'),
     url = 'https://github.com/mbodenhamer/fmap',
     packages = find_packages(),
-    install_requires = [],
+    install_requires = requirements('requirements.txt'),
     entry_points = {
         'console_scripts': [
             'fmap = fmap.__main__:main',
