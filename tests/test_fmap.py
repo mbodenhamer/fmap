@@ -1,5 +1,7 @@
 import os
+import sys
 from fmap import fmap
+from tempfile import mkstemp
 from subprocess import Popen, PIPE
 
 DIR = os.path.abspath(os.path.dirname(__file__))
@@ -37,10 +39,47 @@ def test_fmap():
 
 #-------------------------------------------------------------------------------
 
+def test_main():
+    from fmap import main
+    main = main.main
+    main('-x', '*', 'echo')
+
+    _, path = mkstemp()
+    tf = open(path, 'rt')
+
+    cmd = 'echo {{}} >> {}'.format(path)
+    def seen():
+        tf.seek(0)
+        out = tf.read()
+        seen = map(os.path.basename, filter(bool, out.split('\n')))
+        with open(path, 'wt') as f:
+            f.write('')
+        return set(seen)
+
+    main('-r', TESTDIR, cmd)
+    assert seen() == {'c', 'd', 'f', 'g', 'h'}
+
+    main('-r', TESTDIR, '-z0', cmd)
+    assert seen() == {'c', 'd'}
+
+    main('-r', TESTDIR, '-z0', '-p', cmd)
+    assert seen() == set()
+
+    argv = sys.argv
+    sys.argv = ['', '-r', TESTDIR, cmd]
+    main()
+    assert seen() == {'c', 'd', 'f', 'g', 'h'}
+    sys.argv = argv
+
+    tf.close()
+    os.remove(path)
+
+#-------------------------------------------------------------------------------
+
 def test_fmap_invocation():
     def seen(p):
         out = p.communicate()[0].decode('utf-8')
-        seen = map(os.path.basename, filter(bool, str(out).split('\n')))
+        seen = map(os.path.basename, filter(bool, out.split('\n')))
         return set(seen)
 
     p = Popen('fmap -r {} echo'.format(TESTDIR), stdout=PIPE, shell=True)
@@ -60,6 +99,10 @@ def test_fmap_invocation():
     
     p = Popen('fmap -r {} -x a echo g d h'.format(TESTDIR), stdout=PIPE, 
               shell=True)
+    assert seen(p) == {'d', 'h'}
+
+    p = Popen('python -m fmap -r {} -x a echo g d h'.format(TESTDIR), 
+              stdout=PIPE, shell=True)
     assert seen(p) == {'d', 'h'}
 
 #-------------------------------------------------------------------------------

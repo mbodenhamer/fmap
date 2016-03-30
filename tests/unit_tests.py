@@ -22,7 +22,3 @@ def test_applicable():
     assert list(applicable(names, patterns, excludes)) == ['c', 'ac', 'cd']
 
 #-------------------------------------------------------------------------------
-
-if __name__ == '__main__':
-    test_excluded()
-    test_applicable()

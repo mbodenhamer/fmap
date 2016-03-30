@@ -51,12 +51,10 @@ def apply_command(command, base, names, patterns, excludes, preview=False,
 
 #-------------------------------------------------------------------------------
 
-def fmap(root=None, command='', patterns=None, excludes=None, max_depth=-1,
+def fmap(root='', command='', patterns=None, excludes=None, max_depth=-1,
          top_down=True, preview=False, verbose=False, apply_dirs=False, 
          follow_links=False, abort_on_errors=False):
     
-    if root is None:
-        root = os.getcwd()
     if patterns is None:
         patterns = ['*']
     if excludes is None:
