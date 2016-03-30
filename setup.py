@@ -22,7 +22,7 @@ setup(
     install_requires = requirements('requirements.txt'),
     entry_points = {
         'console_scripts': [
-            'fmap = fmap.__main__:main',
+            'fmap = fmap.main:main',
         ]
     },
     license = 'MIT',
