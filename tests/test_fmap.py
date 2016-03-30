@@ -1,5 +1,6 @@
 import os
 from fmap import fmap
+from subprocess import Popen, PIPE
 
 DIR = os.path.abspath(os.path.dirname(__file__))
 TESTDIR = os.path.join(DIR, 'tree')
@@ -37,6 +38,28 @@ def test_fmap():
 #-------------------------------------------------------------------------------
 
 def test_fmap_invocation():
-    pass
+    def seen(p):
+        out = p.communicate()[0].decode('utf-8')
+        seen = map(os.path.basename, filter(bool, str(out).split('\n')))
+        return set(seen)
+
+    p = Popen('fmap -r {} echo'.format(TESTDIR), stdout=PIPE, shell=True)
+    assert seen(p) == {'c', 'd', 'f', 'g', 'h'}
+
+    p = Popen('fmap -r {} -z0 echo'.format(TESTDIR), stdout=PIPE, shell=True)
+    assert seen(p) == {'c', 'd'}
+
+    p = Popen('fmap -r {} -d echo'.format(TESTDIR), stdout=PIPE, shell=True)
+    assert seen(p) == {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'}
+
+    p = Popen('fmap -r {} -d -z0 echo'.format(TESTDIR), stdout=PIPE, shell=True)
+    assert seen(p) == {'a', 'b', 'c', 'd'}
+
+    p = Popen('fmap -r {} -x a echo'.format(TESTDIR), stdout=PIPE, shell=True)
+    assert seen(p) == {'c', 'd', 'h'}
+    
+    p = Popen('fmap -r {} -x a echo g d h'.format(TESTDIR), stdout=PIPE, 
+              shell=True)
+    assert seen(p) == {'d', 'h'}
 
 #-------------------------------------------------------------------------------
