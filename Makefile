@@ -2,10 +2,13 @@ all: test
 
 #-------------------------------------------------------------------------------
 
-build:
+check:
+	@check-manifest
+
+build: check
 	@python setup.py sdist bdist_wheel
 
-.PHONY: build
+.PHONY: check build
 #-------------------------------------------------------------------------------
 
 test:
