@@ -53,21 +53,15 @@ def apply_command(command, base, names, patterns, excludes, preview=False,
 
 def fmap(root='', command='', patterns=None, excludes=None, max_depth=-1,
          top_down=True, preview=False, verbose=False, apply_dirs=False, 
-         follow_links=False, abort_on_errors=False):
+         follow_links=False):
     
     if patterns is None:
         patterns = ['*']
     if excludes is None:
         excludes = []
 
-    def error(err):
-        if abort_on_errors:
-            raise err
-        else:
-            print(err.args[0])
-
     depth = 0
-    for base, dirs, files in os.walk(root, topdown=top_down, onerror=error,
+    for base, dirs, files in os.walk(root, topdown=top_down, 
                                      followlinks=follow_links):
         if max_depth >= 0:
             if depth > max_depth:

@@ -25,9 +25,6 @@ def process_args(args):
     parser.add_argument('-b', '--bottom-up', dest='top_down', default=True,
                         action='store_false',
                         help="Walk the tree from the bottom up")
-    parser.add_argument('-e', '--abort-on-errors', dest="abort_on_errors",
-                        default=False, action="store_true",
-                        help="Abort execution for file listing errors")
     parser.add_argument('-z', '--max-depth', dest="max_depth", default=-1,
                         type=int,
                         help="Maximum recursion depth")
