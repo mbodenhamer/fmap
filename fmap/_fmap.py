@@ -1,5 +1,10 @@
 import os
+import six
 from fnmatch import fnmatch
+
+_str_types = (str,)
+if six.PY2:
+    _str_types = (str, unicode)
 
 #-------------------------------------------------------------------------------
 # Exclusion/Inclusion Utilities
@@ -24,9 +29,18 @@ def applicable(names, patterns, excludes):
                 break
 
 #-------------------------------------------------------------------------------
+# Application functions
+
+def apply_callable(cmd, base, names, patterns, excludes):
+    for name in applicable(names, patterns, excludes):
+        cmd(name)
 
 def apply_command(command, base, names, patterns, excludes, preview=False, 
                   verbose=False):
+    if not isinstance(command, _str_types):
+        apply_callable(command, base, names, patterns, excludes)
+        return
+
     for name in applicable(names, patterns, excludes):
         path = os.path.join(base, name)
         cmd = command.format(path)
