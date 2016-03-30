@@ -6,6 +6,11 @@ python:
 
 install:
   - pip install -r requirements.txt
+  - pip install coveralls
   - pip install .
 
-script: nosetests
+script:
+  coverage run --source=fmap nosetests
+
+after_success:
+  coveralls
