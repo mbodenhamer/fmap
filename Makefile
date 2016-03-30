@@ -3,12 +3,14 @@ all: test
 #-------------------------------------------------------------------------------
 
 test:
-	nosetests -v
+	@coverage erase
+	@tox
+	@coverage html
 
-dbtest:
-	nosetests -v --ipdb --ipdb-failures
+show:
+	@chromium-browser htmlcov/index.html
 
-.PHONY: test dbtest
+.PHONY: test show
 #-------------------------------------------------------------------------------
 
 
