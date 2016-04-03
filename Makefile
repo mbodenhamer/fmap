@@ -11,6 +11,13 @@ build: check
 .PHONY: check build
 #-------------------------------------------------------------------------------
 
+pip-compile:
+	@pip-compile dev-requirements.in
+	@pip-compile requirements.in
+
+.PHONY: pip-compile
+#-------------------------------------------------------------------------------
+
 test:
 	@coverage erase
 	@tox

@@ -1,4 +1,5 @@
 check-manifest
 coverage
 detox
+pip-tools
 tox

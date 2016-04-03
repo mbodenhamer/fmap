@@ -19,7 +19,7 @@ setup(
     long_description = read('README.rst'),
     url = 'https://github.com/mbodenhamer/fmap',
     packages = find_packages(),
-    install_requires = requirements('requirements.txt'),
+    install_requires = requirements('requirements.in'),
     entry_points = {
         'console_scripts': [
             'fmap = fmap.main:main',
