@@ -1,5 +1,6 @@
-include MANIFEST.in README.rst LICENSE Makefile
-include requirements.txt version.txt
+include MANIFEST.in README.rst CHANGELOG.rst LICENSE Makefile version.txt
+include requirements.txt requirements.in
+include dev-requirements.txt dev-requirements.in
 include tox.ini
 recursive-include tests *
 recursive-exclude tests *.pyc
