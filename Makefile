@@ -1,34 +1,52 @@
 all: test
 
+IMAGE = fmap-dev
+PYDEV = docker run --rm -it -e BE_UID=`id -u` -e BE_GID=`id -g` \
+	-v $(CURDIR):/app $(IMAGE)
+VERSIONS = 2.7.11,3.3.6,3.4.4,3.5.1
+
 #-------------------------------------------------------------------------------
+# Docker image management
+
+docker-build:
+	@docker build -t $(IMAGE):latest --build-arg versions=$(VERSIONS) .
+
+docker-rmi:
+	@docker rmi $(IMAGE)
+
+.PHONY: docker-build docker-rmi
+#-------------------------------------------------------------------------------
+# Build management
 
 check:
-	@check-manifest
+	@$(PYDEV) check-manifest
 
 build: check
-	@python setup.py sdist bdist_wheel
+	@$(PYDEV) python setup.py sdist bdist_wheel
 
 .PHONY: check build
 #-------------------------------------------------------------------------------
+# Dependency management
 
 pip-compile:
-	@pip-compile dev-requirements.in
-	@pip-compile requirements.in
+	@$(PYDEV) pip-compile dev-requirements.in
+	@$(PYDEV) pip-compile requirements.in
 
 .PHONY: pip-compile
 #-------------------------------------------------------------------------------
+# Tests
 
 test:
-	@coverage erase
-	@tox
-	@coverage html
+	@$(PYDEV) coverage erase
+	@$(PYDEV) tox
+	@$(PYDEV) coverage html
 
 show:
 	@chromium-browser htmlcov/index.html
 
 .PHONY: test show
 #-------------------------------------------------------------------------------
-
+# Cleanup
 
 clean: 
 	@rm -f *.py[co] */*.py[co] */*/*.py[co]
