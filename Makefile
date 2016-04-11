@@ -1,5 +1,7 @@
 all: test
 
+VERSION = 0.1
+
 IMAGE = fmap-dev
 PYDEV = docker run --rm -it -e BE_UID=`id -u` -e BE_GID=`id -g` \
 	-v $(CURDIR):/app $(IMAGE)
@@ -43,6 +45,9 @@ test:
 	@$(PYDEV) coverage erase
 	@$(PYDEV) tox
 	@$(PYDEV) coverage html
+
+dist-test: build
+	@$(PYDEV) dist-test $(VERSION)
 
 show:
 	@python -c "import webbrowser as wb; wb.open('htmlcov/index.html')"
