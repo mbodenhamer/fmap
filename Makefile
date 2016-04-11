@@ -1,6 +1,6 @@
 all: test
 
-VERSION = 0.1
+VERSION = `cat version.txt | xargs`
 
 IMAGE = fmap-dev
 PYDEV = docker run --rm -it -e BE_UID=`id -u` -e BE_GID=`id -g` \
