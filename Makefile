@@ -42,7 +42,7 @@ test:
 	@$(PYDEV) coverage html
 
 show:
-	@chromium-browser htmlcov/index.html
+	@python -c "import webbrowser as wb; wb.open('htmlcov/index.html')"
 
 .PHONY: test show
 #-------------------------------------------------------------------------------
