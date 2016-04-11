@@ -1,6 +1,7 @@
 include MANIFEST.in README.rst CHANGELOG.rst LICENSE Makefile version.txt
 include requirements.txt requirements.in
 include dev-requirements.txt dev-requirements.in
-include tox.ini
+include apt-requirements.txt
+include tox.ini Dockerfile
 recursive-include tests *
 recursive-exclude tests *.pyc
