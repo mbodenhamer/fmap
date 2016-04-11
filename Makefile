@@ -14,7 +14,10 @@ docker-build:
 docker-rmi:
 	@docker rmi $(IMAGE)
 
-.PHONY: docker-build docker-rmi
+docker-shell:
+	@$(PYDEV) bash
+
+.PHONY: docker-build docker-rmi docker-shell
 #-------------------------------------------------------------------------------
 # Build management
 
