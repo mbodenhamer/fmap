@@ -3,5 +3,6 @@ include requirements.txt requirements.in
 include dev-requirements.txt dev-requirements.in
 include apt-requirements.txt
 include tox.ini Dockerfile
+recursive-include dev *
 recursive-include tests *
 recursive-exclude tests *.pyc
