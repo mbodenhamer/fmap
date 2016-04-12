@@ -11,7 +11,7 @@ A Python command-line utility for recursively applying a command to a filesystem
 
 Usage
 -----
-.. code-block::
+.. code-block:: bash
 
     Usage: fmap [-h] [-p] [-v] [-d] [-l] [-b] [-z <depth>] [-x <pattern>] [-r <dir>]
          <cmd> [<pattern> [<pattern> ...]]

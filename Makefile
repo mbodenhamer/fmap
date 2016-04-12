@@ -31,6 +31,17 @@ build: check
 
 .PHONY: check build
 #-------------------------------------------------------------------------------
+# Documentation
+
+docs:
+	@$(MAKE) -C docs html
+
+view:
+	@python -c "import webbrowser as wb; \
+	wb.open('docs/_build/html/index.html')"
+
+.PHONY: docs view
+#-------------------------------------------------------------------------------
 # Dependency management
 
 pip-compile:
