@@ -70,6 +70,7 @@ show:
 clean: 
 	@rm -f *.py[co] */*.py[co] */*/*.py[co]
 	@rm -rf */__pycache__ */*/__pycache__
+	@$(MAKE) -C docs clean
 
 .PHONY: clean
 #-------------------------------------------------------------------------------
