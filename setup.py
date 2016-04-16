@@ -26,6 +26,7 @@ setup(
         ]
     },
     license = 'MIT',
+    keywords = 'fmap recursive apply command filesystem tree find',
     classifiers = [
         'Development Status :: 4 - Beta',
         'Environment :: Console',
