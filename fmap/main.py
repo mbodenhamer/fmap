@@ -43,7 +43,7 @@ def process_args(args):
                         'the current directory by default.')
     parser.add_argument('command', metavar='CMD', type=str,
                         help="The command to apply. The file to be applied may "
-                        "be optionionally specified by '{}'. If '{}' is not "
+                        "be optionally specified by '{}'. If '{}' is not "
                         "supplied, the file will be passed in as the last "
                         "argument.")
     parser.add_argument('patterns', metavar='PATTERN', nargs='*', 
