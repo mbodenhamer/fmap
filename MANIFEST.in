@@ -6,3 +6,6 @@ include tox.ini Dockerfile
 recursive-include dev *
 recursive-include tests *
 recursive-exclude tests *.pyc
+recursive-include docs *.py
+recursive-include docs *.rst
+recursive-include docs Makefile
