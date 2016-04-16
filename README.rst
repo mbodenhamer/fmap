@@ -7,6 +7,9 @@ fmap
 .. image:: https://img.shields.io/coveralls/mbodenhamer/fmap.svg
     :target: https://coveralls.io/r/mbodenhamer/fmap
     
+.. image:: https://readthedocs.org/projects/fmap/badge/?version=latest
+    :target: http://fmap.readthedocs.org/en/latest/?badge=latest
+
 A Python command-line utility for recursively applying a command to a filesystem tree.
 
 The program works by walking the filesystem tree (either the value of ``-r``, if supplied, or the current working directory) using Python's ``os.walk``.  The program is invoked with a string specifying a command to be executed at each directory in the tree.  In each directory, each file (and sub-directory, if ``-d`` is specified) is matched against the list of include and exclude patterns specified at the command line.  If a file (and/or directory) matches an include pattern and does not match any exclude patterns, the command is executed with that file (or directory) name as an argument.  If no include patterns are specified, the program applies the command to all files (or directories) that do not match any exclude pattern.
